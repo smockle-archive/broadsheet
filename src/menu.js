@@ -66,18 +66,6 @@ module.exports = [
     ]
   },
   {
-    label: 'View',
-    submenu: [
-      {
-        label: 'Reload',
-        accelerator: 'Command+R',
-        click: () => {
-          win.reload()
-        }
-      }
-    ]
-  },
-  {
     label: 'Window',
     submenu: [
       {
