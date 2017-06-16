@@ -1,21 +1,34 @@
 const { app, Menu, BrowserWindow } = require('electron')
-const windowStateKeeper = require('electron-window-state')
-const { moveToApplications } = require('electron-lets-move')
-require('electron-debug')({ showDevTools: false })
 
-let mainWindow
+// Import window state memorizer
+const windowStateKeeper = require('electron-window-state')
+
+// Import /Applications mover
+const { moveToApplications } = require('electron-lets-move')
+
+// Import Menu template
 const menuTemplate = require('./menu')
 
-function createWindow () {
+// Open devtools with CmdOrCtrl+Alt+I
+require('electron-debug')({ showDevTools: false })
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow = null
+
+app.on('ready', () => {
+  // Load menu
   let appMenu = Menu.buildFromTemplate(menuTemplate)
   Menu.setApplicationMenu(appMenu)
 
+  // Set default width & height
   let mainWindowState = windowStateKeeper({
     defaultWidth: 1024,
     defaultHeight: 700
   })
 
-  let win = new BrowserWindow({
+  // Configure browser window
+  mainWindow = new BrowserWindow({
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
@@ -26,25 +39,28 @@ function createWindow () {
     minHeight: 150
   })
 
-  mainWindowState.manage(win)
+  // Remember window width & height
+  mainWindowState.manage(mainWindow)
 
-  win.loadURL(`file://${__dirname}/index.html`)
+  // Open Instapaper website
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
-  win.on('closed', () => {
-    win = null
-  })
-  return win
-}
-
-app.on('ready', () => {
-  mainWindow = createWindow()
+  // Prompt to move to /Applications
   if (process.env.NODE_ENV !== 'development') {
     moveToApplications()
   }
+
+  // Ensure garbage collection occurs when window is closed
+  mainWindow.on('closed', () => {
+    mainWindow = null
+  })
 })
 
-app.on('activate', (event, hasVisibleWindows) => {
-  if (!hasVisibleWindows) {
-    createWindow()
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
 })

@@ -1,6 +1,8 @@
 body {
   margin: 0;
 }
+
+/* A draggable title bar */
 #title-bar {
   height: 30px;
   left: 0;
@@ -10,6 +12,8 @@ body {
   z-index: 10;
   -webkit-app-region: drag;
 }
+
+/* Web view */
 #broadsheet {
   height: 100vh;
   width: 100vw;

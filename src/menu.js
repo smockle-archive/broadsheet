@@ -2,87 +2,44 @@ module.exports = [
   {
     label: 'Broadsheet',
     submenu: [
-      {
-        label: 'About Broadsheet',
-        selector: 'orderFrontStandardAboutPanel:'
-      },
+      { role: 'about' },
+      { type: 'separator' },
+      { role: 'hide' },
+      { role: 'hideothers' },
+      { role: 'unhide' },
+      { type: 'separator' },
+      { role: 'quit' }
+    ]
+  },
+  {
+    role: 'editMenu',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'selectall' },
       { type: 'separator' },
       {
-        label: 'Hide Broadsheet',
-        accelerator: 'Command+H',
-        selector: 'hide:'
-      },
-      {
-        label: 'Hide Others',
-        accelerator: 'Command+Shift+H',
-        selector: 'hideOtherApplications:'
-      },
-      {
-        label: 'Show All',
-        selector: 'unhideAllApplications:'
-      },
-      { type: 'separator' },
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        selector: 'terminate:'
+        label: 'Find',
+        submenu: [
+          {
+            label: 'Find…',
+            accelerator: 'CmdOrCtrl+F'
+          }
+        ]
       }
     ]
   },
   {
-    label: 'Edit',
+    role: 'window',
     submenu: [
-      {
-        label: 'Undo',
-        accelerator: 'Command+Z',
-        selector: 'undo:'
-      },
-      {
-        label: 'Redo',
-        accelerator: 'Shift+Command+Z',
-        selector: 'redo:'
-      },
+      { role: 'minimize' },
+      { role: 'close' },
       { type: 'separator' },
-      {
-        label: 'Cut',
-        accelerator: 'Command+X',
-        selector: 'cut:'
-      },
-      {
-        label: 'Copy',
-        accelerator: 'Command+C',
-        selector: 'copy:'
-      },
-      {
-        label: 'Paste',
-        accelerator: 'Command+V',
-        selector: 'paste:'
-      },
-      {
-        label: 'Select All',
-        accelerator: 'Command+A',
-        selector: 'selectAll:'
-      }
-    ]
-  },
-  {
-    label: 'Window',
-    submenu: [
-      {
-        label: 'Minimize',
-        accelerator: 'Command+M',
-        selector: 'performMiniaturize:'
-      },
-      {
-        label: 'Close',
-        accelerator: 'Command+W',
-        selector: 'hide:'
-      },
-      { type: 'separator' },
-      {
-        label: 'Bring All to Front',
-        selector: 'arrangeInFront:'
-      }
+      { role: 'front' }
     ]
   }
 ]
