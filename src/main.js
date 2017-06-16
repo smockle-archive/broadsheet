@@ -1,4 +1,5 @@
-const { app, Menu, BrowserWindow } = require('electron')
+const { app, shell, Menu, BrowserWindow } = require('electron')
+const { URL } = require('url')
 
 // Import window state memorizer.
 const windowStateKeeper = require('electron-window-state')
@@ -10,7 +11,7 @@ const { moveToApplications } = require('electron-lets-move')
 const menuTemplate = require('./menu')
 
 // Open devtools with CmdOrCtrl+Alt+I.
-require('electron-debug')({ showDevTools: false })
+// require('electron-debug')({ showDevTools: true })
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -63,6 +64,22 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+// Handle external links. We have to do this in main,
+// because event.preventDefault does not work in webview
+// event listeners.
+const handleRedirect = webview => (event, url) => {
+  if (new URL(url).host !== new URL(webview.getURL()).host) {
+    event.preventDefault()
+    shell.openExternal(url)
+  }
+}
+app.on('web-contents-created', (event, webview) => {
+  if (webview.getType() === 'webview') {
+    webview.on('will-navigate', handleRedirect(webview))
+    webview.on('new-window', handleRedirect(webview))
+  }
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

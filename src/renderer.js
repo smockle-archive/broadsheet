@@ -1,11 +1,13 @@
-const { ipcRenderer, shell } = require('electron')
+const { ipcRenderer } = require('electron')
 
 const webview = document.querySelector('webview')
 
-webview.addEventListener('new-window', event => {
-  event.preventDefault()
-  shell.openExternal(event.url)
-})
+// Inject CSS into <webview>
+// webview.addEventListener('dom-ready', () => {
+//   webview.insertCSS(
+//     fs.readFileSync(path.resolve(`${__dirname}/renderer.css`), 'utf8')
+//   )
+// })
 
 // Log messages sent via ipcRenderer.sendToHost
 webview.addEventListener('ipc-message', event => {

@@ -17,6 +17,7 @@ Broadsheet.prototype.search = function () {
   if (input && typeof input.focus === 'function') {
     input.focus()
   }
+  console.log(document.activeElement)
 }
 
 window.broadsheet = Broadsheet()
