@@ -1,5 +1,7 @@
 # Broadsheet
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/smockle/broadsheet.svg)](https://greenkeeper.io/)
+
 Electron wrapper for Instapaper. This project is not affiliated with Instapaper or Instapaper Holdings, Inc. Instapaper is a registered trademark of Instapaper Holdings, Inc.
 
 ## Usage
