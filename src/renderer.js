@@ -1,16 +1,18 @@
 const { ipcRenderer, shell } = require('electron')
 
-const broadsheet = document.getElementById('broadsheet')
+const webview = document.querySelector('webview')
 
-broadsheet.addEventListener('new-window', event => {
+webview.addEventListener('new-window', event => {
   event.preventDefault()
   shell.openExternal(event.url)
 })
 
-ipcRenderer.on('find', () => {
-  const searchbar = document.getElementById('search_box')
-  console.log(searchbar)
-  if (searchbar && typeof searchbar.focus === 'function') {
-    searchbar.focus()
-  }
+// Log messages sent via ipcRenderer.sendToHost
+webview.addEventListener('ipc-message', event => {
+  console.log(event.channel)
+})
+
+// Focus the search bar in the article list
+ipcRenderer.on('search', () => {
+  webview.executeJavaScript('window.broadsheet.search()')
 })

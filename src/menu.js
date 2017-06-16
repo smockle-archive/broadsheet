@@ -31,8 +31,8 @@ module.exports = [
             label: 'Find…',
             accelerator: 'CmdOrCtrl+F',
             click: (_, mainWindow) => {
-              mainWindow.webContents.send('find')
-              // ipcMain.emit('find')
+              mainWindow.webContents.send('search')
+              // ipcMain.emit('search')
             }
           }
         ]

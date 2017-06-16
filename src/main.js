@@ -81,6 +81,6 @@ app.on('activate', () => {
   }
 })
 
-// ipcMain.on('find', () => {
-//   mainWindow.webContents.send('find')
+// ipcMain.on('search', () => {
+//   mainWindow.webContents.send('search')
 // })
