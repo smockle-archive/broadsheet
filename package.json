@@ -1,0 +1,45 @@
+{
+  "name": "Broadsheet",
+  "version": "1.0.0",
+  "description": "Electron wrapper for Instapaper",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "NODE_ENV='development' electron .",
+    "package": "electron-packager . --overwrite --asar --out ./dist/ --app-bundle-id='com.smockle.broadsheet' --osx-sign --icon=./src/icon.icns --app-version=$npm_package_version && cd dist/Broadsheet-darwin-x64 && zip -ryXq9 ../Broadsheet-macos-${npm_package_version}.zip Broadsheet.app",
+    "precommit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smockle/broadsheet.git"
+  },
+  "author": "Clay Miller <clay@smockle.com> (https://smockle.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smockle/broadsheet/issues"
+  },
+  "homepage": "https://github.com/smockle/broadsheet#readme",
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.13.4",
+    "lint-staged": "^3.6.0",
+    "prettier-eslint-cli": "^4.0.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "./node_modules/.bin/prettier-eslint --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "electron-debug": "^1.1.0",
+    "electron-lets-move": "0.0.5",
+    "electron-window-state": "^4.0.2"
+  }
+}
