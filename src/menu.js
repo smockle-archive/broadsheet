@@ -14,6 +14,19 @@ module.exports = [
     ]
   },
   {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open in Browser',
+        accelerator: 'O',
+        click: (_, mainWindow) => {
+          mainWindow.webContents.send('open')
+          // ipcMain.emit('open')
+        }
+      }
+    ]
+  },
+  {
     role: 'editMenu',
     submenu: [
       { role: 'undo' },
@@ -51,6 +64,32 @@ module.exports = [
       { role: 'togglefullscreen' }
     ]
   },
+  // {
+  //   label: 'History',
+  //   submenu: [
+  //     {
+  //       label: 'Back',
+  //       accelerator: 'CmdOrCtrl+[',
+  //       click: (_, mainWindow) => {
+  //         mainWindow.webContents.goBack()
+  //       }
+  //     },
+  //     {
+  //       label: 'Forward',
+  //       accelerator: 'CmdOrCtrl+]',
+  //       click: (_, mainWindow) => {
+  //         mainWindow.webContents.goForward()
+  //       }
+  //     },
+  //     {
+  //       label: 'Home',
+  //       accelerator: 'Shift+CmdOrCtrl+H',
+  //       click: (_, mainWindow) => {
+  //         mainWindow.webContents.goToIndex()
+  //       }
+  //     }
+  //   ]
+  // },
   {
     role: 'window',
     submenu: [

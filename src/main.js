@@ -11,7 +11,7 @@ const { moveToApplications } = require('electron-lets-move')
 const menuTemplate = require('./menu')
 
 // Open devtools with CmdOrCtrl+Alt+I.
-// require('electron-debug')({ showDevTools: true })
+require('electron-debug')({ showDevTools: false })
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

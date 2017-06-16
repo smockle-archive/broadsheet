@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron')
+
 // Redefine console.log to use ipcRenderer.sendToHost
 const console = {
   log: function () {
@@ -18,6 +19,14 @@ Broadsheet.prototype.search = function () {
     input.focus()
   }
   console.log(document.activeElement)
+}
+
+// Get origin URL
+Broadsheet.prototype.getOriginURL = function () {
+  const original = document.querySelector('main a.original')
+  if (original) {
+    return original.href
+  }
 }
 
 window.broadsheet = Broadsheet()

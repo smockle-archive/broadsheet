@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { shell, ipcRenderer } = require('electron')
 
 const webview = document.querySelector('webview')
 
@@ -17,4 +17,17 @@ webview.addEventListener('ipc-message', event => {
 // Focus the search bar in the article list
 ipcRenderer.on('search', () => {
   webview.executeJavaScript('window.broadsheet.search()')
+})
+
+// Open in browser
+ipcRenderer.on('open', () => {
+  webview.executeJavaScript(
+    'window.broadsheet.getOriginURL()',
+    false,
+    result => {
+      if (result) {
+        shell.openExternal(result)
+      }
+    }
+  )
 })
