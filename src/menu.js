@@ -1,3 +1,5 @@
+const { ipcMain } = require('electron')
+
 module.exports = [
   {
     label: 'Broadsheet',
@@ -27,10 +29,26 @@ module.exports = [
         submenu: [
           {
             label: 'Find…',
-            accelerator: 'CmdOrCtrl+F'
+            accelerator: 'CmdOrCtrl+F',
+            click: (_, mainWindow) => {
+              mainWindow.webContents.send('find')
+              // ipcMain.emit('find')
+            }
           }
         ]
       }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { type: 'separator' },
+      { role: 'resetzoom' },
+      { role: 'zoomin' },
+      { role: 'zoomout' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
     ]
   },
   {

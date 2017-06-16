@@ -1,4 +1,4 @@
-const { app, Menu, BrowserWindow } = require('electron')
+const { app, ipcMain, Menu, BrowserWindow } = require('electron')
 
 // Import window state memorizer
 const windowStateKeeper = require('electron-window-state')
@@ -42,8 +42,8 @@ app.on('ready', () => {
   // Remember window width & height
   mainWindowState.manage(mainWindow)
 
-  // Open Instapaper website
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  // Load renderer
+  mainWindow.loadURL(`file://${__dirname}/renderer.html`)
 
   // Prompt to move to /Applications
   if (process.env.NODE_ENV !== 'development') {
@@ -57,10 +57,14 @@ app.on('ready', () => {
 })
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
+
+// ipcMain.on('find', () => {
+//   mainWindow.webContents.send('find')
+// })

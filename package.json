@@ -2,7 +2,7 @@
   "name": "Broadsheet",
   "version": "1.0.0",
   "description": "Electron wrapper for Instapaper",
-  "main": "./src/server.js",
+  "main": "./src/main.js",
   "scripts": {
     "start": "NODE_ENV='development' electron .",
     "package": "electron-packager . --overwrite --asar --out ./dist/ --app-bundle-id='com.smockle.broadsheet' --osx-sign --icon=./src/icon.icns --app-version=$npm_package_version && cd dist/Broadsheet-darwin-x64 && zip -ryXq9 ../Broadsheet-macos-${npm_package_version}.zip Broadsheet.app",
