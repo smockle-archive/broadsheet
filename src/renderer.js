@@ -8,5 +8,9 @@ broadsheet.addEventListener('new-window', event => {
 })
 
 ipcRenderer.on('find', () => {
-  console.log('ipcRenderer.find')
+  const searchbar = document.getElementById('search_box')
+  console.log(searchbar)
+  if (searchbar && typeof searchbar.focus === 'function') {
+    searchbar.focus()
+  }
 })
