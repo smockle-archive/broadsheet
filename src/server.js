@@ -1,13 +1,9 @@
-const { app, shell, Menu, BrowserWindow } = require('electron')
-const path = require('path')
-const url = require('url')
-const fs = require('fs')
+const { app, Menu, BrowserWindow } = require('electron')
 const windowStateKeeper = require('electron-window-state')
 const { moveToApplications } = require('electron-lets-move')
 require('electron-debug')({ showDevTools: false })
 
 let mainWindow
-win = null
 const menuTemplate = require('./menu')
 
 function createWindow () {
@@ -19,7 +15,7 @@ function createWindow () {
     defaultHeight: 700
   })
 
-  win = new BrowserWindow({
+  let win = new BrowserWindow({
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
@@ -32,7 +28,7 @@ function createWindow () {
 
   mainWindowState.manage(win)
 
-  win.loadURL('file://' + __dirname + '/index.html')
+  win.loadURL(`file://${__dirname}/index.html`)
 
   win.on('closed', () => {
     win = null
