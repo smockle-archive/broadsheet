@@ -1,4 +1,5 @@
 const { shell, ipcRenderer } = require('electron')
+const debounce = require('lodash.debounce')
 
 const webview = document.querySelector('webview')
 
@@ -13,6 +14,53 @@ const webview = document.querySelector('webview')
 webview.addEventListener('ipc-message', event => {
   console.log(event.channel)
 })
+
+// If possible, navigate back.
+function goBack () {
+  if (webview.canGoBack()) {
+    webview.stop()
+    webview.goBack()
+  }
+}
+
+// If possible, navigate forward.
+function goForward () {
+  if (webview.canGoForward()) {
+    webview.stop()
+    webview.goForward()
+  }
+}
+
+// If possible, navigate to the index (webview.src)
+function goHome () {
+  webview.stop()
+  webview.goToIndex(0)
+}
+
+// Handle wheel event.
+const onwheel = debounce(
+  event => {
+    if (!event) {
+      return
+    }
+    if ((event.deltaX || 0) < 0 && window.scrollX === 0) {
+      // Swipe left-to-right.
+      goBack()
+    } else if ((event.deltaX || 0) > 0 && window.scrollX === 0) {
+      // Swipe right-to-left.
+      goForward()
+    }
+  },
+  100,
+  {
+    leading: true,
+    trailing: false
+  }
+)
+webview.addEventListener('wheel', onwheel)
+ipcRenderer.on('go-back', goBack)
+ipcRenderer.on('go-forward', goForward)
+ipcRenderer.on('go-home', goHome)
 
 // Focus the search bar in the article list
 ipcRenderer.on('search', () => {
