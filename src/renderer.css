@@ -16,6 +16,8 @@ body {
 
 /* Web view */
 webview {
-  height: 100vh;
+  height: calc(100vh - 10px);
+  position: relative;
+  top: 10px;
   width: 100vw;
 }
