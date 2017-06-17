@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/smockle/broadsheet#readme",
   "devDependencies": {
-    "electron": "^1.4.15",
+    "electron": "^1.7.3",
     "electron-packager": "^8.5.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
@@ -40,6 +40,7 @@
   "dependencies": {
     "electron-debug": "^1.1.0",
     "electron-lets-move": "0.0.5",
-    "electron-window-state": "^4.0.2"
+    "electron-window-state": "^4.0.2",
+    "lodash.debounce": "^4.0.8"
   }
 }
