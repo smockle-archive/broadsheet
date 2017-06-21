@@ -38,26 +38,26 @@ function goHome () {
 }
 
 // Handle wheel event.
-const onwheel = debounce(
-  event => {
-    if (!event) {
-      return
-    }
-    if ((event.deltaX || 0) < 0 && window.scrollX === 0) {
-      // Swipe left-to-right.
-      goBack()
-    } else if ((event.deltaX || 0) > 0 && window.scrollX === 0) {
-      // Swipe right-to-left.
-      goForward()
-    }
-  },
-  100,
-  {
-    leading: true,
-    trailing: false
-  }
-)
-webview.addEventListener('wheel', onwheel)
+// const onwheel = debounce(
+//   event => {
+//     if (!event) {
+//       return
+//     }
+//     if ((event.deltaX || 0) < 0 && window.scrollX === 0) {
+//       // Swipe left-to-right.
+//       goBack()
+//     } else if ((event.deltaX || 0) > 0 && window.scrollX === 0) {
+//       // Swipe right-to-left.
+//       goForward()
+//     }
+//   },
+//   100,
+//   {
+//     leading: true,
+//     trailing: false
+//   }
+// )
+// webview.addEventListener('wheel', onwheel)
 ipcRenderer.on('go-back', goBack)
 ipcRenderer.on('go-forward', goForward)
 ipcRenderer.on('go-home', goHome)
