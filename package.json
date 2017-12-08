@@ -38,7 +38,6 @@
     ]
   },
   "dependencies": {
-    "electron-debug": "^1.1.0",
     "electron-lets-move": "0.0.5",
     "electron-window-state": "^4.0.2",
     "lodash.debounce": "^4.0.8"
