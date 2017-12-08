@@ -56,6 +56,7 @@ module.exports = [
     label: 'View',
     submenu: [
       { role: 'reload' },
+      { role: 'toggledevtools' },
       { type: 'separator' },
       { role: 'resetzoom' },
       { role: 'zoomin' },
